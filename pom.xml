@@ -4,12 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.spectre</groupId>
-	<artifactId>auto-output-log-spring-boot-starter</artifactId>
+	<artifactId>hot-log</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<modules>
+		<module>hot-log-agent</module>
+		<module>hot-log-core</module>
+		<module>hot-log-collector</module>
+		<module>hot-log-web</module>
+	</modules>
+	<packaging>pom</packaging>
 
-	<name>auto-output-log</name>
-	<description>Project for Auto Output Log</description>
+	<name>hot-log</name>
+	<description>Hot Log</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,6 +28,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<bytebuddy.version>1.5.7</bytebuddy.version>
+		<lombok.version>1.16.20</lombok.version>
+		<jackson.version>2.9.3</jackson.version>
+		<fastjson.version>1.2.47</fastjson.version>
 	</properties>
 
 	<dependencies>
@@ -40,16 +50,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 		</dependency>
-	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
 
+		<!--jackson-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!--fast json-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+    </dependencies>
 
 </project>
