@@ -7,7 +7,9 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.JavaModule;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.annotation.Annotation;
 import java.lang.instrument.Instrumentation;
 
 /**
@@ -24,7 +26,7 @@ public class MyAgent {
             @Override
             public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader) {
                 return builder
-                        .method(ElementMatchers.<MethodDescription>any()) // 拦截任意方法
+                        .method(ElementMatchers.any()) // 拦截任意方法
                         .intercept(MethodDelegation.to(TimeInterceptor.class)); // 委托
             }
         };

@@ -24,7 +24,9 @@ public class TimeInterceptor {
         System.out.println(method+":"+JSON.toJSONString(allArguments));
         try {
             // 原有函数执行
-            return callable.call();
+            Object object = callable.call();
+            System.out.println(JSON.toJSONString(object));
+            return object;
         } finally {
             System.out.println(method + ": took " + (System.currentTimeMillis() - start) + "ms");
         }
