@@ -1,4 +1,4 @@
-package com.github.spectre.aol.agent.myagent;
+package com.github.spectre.hotlog.agent.myagent;
 
 import lombok.Getter;
 import lombok.Setter;

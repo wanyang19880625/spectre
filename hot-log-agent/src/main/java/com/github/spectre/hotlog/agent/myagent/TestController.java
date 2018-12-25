@@ -1,4 +1,4 @@
-package com.github.spectre.aol.agent.myagent;
+package com.github.spectre.hotlog.agent.myagent;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

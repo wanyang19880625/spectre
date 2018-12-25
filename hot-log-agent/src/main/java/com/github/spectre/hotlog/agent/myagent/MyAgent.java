@@ -1,15 +1,12 @@
-package com.github.spectre.aol.agent.myagent;
+package com.github.spectre.hotlog.agent.myagent;
 
 import net.bytebuddy.agent.builder.AgentBuilder;
-import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.JavaModule;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.annotation.Annotation;
 import java.lang.instrument.Instrumentation;
 
 /**
@@ -55,7 +52,7 @@ public class MyAgent {
 
         new AgentBuilder
                 .Default()
-                .type(ElementMatchers.nameStartsWith("com.github.spectre.aol.agent.myagent")) // 指定需要拦截的类
+                .type(ElementMatchers.nameStartsWith("com.github.spectre.hotlog.agent.myagent")) // 指定需要拦截的类
                 .transform(transformer)
                 .with(listener)
                 .installOn(inst);

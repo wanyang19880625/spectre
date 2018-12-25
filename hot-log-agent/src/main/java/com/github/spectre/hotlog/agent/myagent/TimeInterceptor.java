@@ -1,4 +1,4 @@
-package com.github.spectre.aol.agent.myagent;
+package com.github.spectre.hotlog.agent.myagent;
 
 import com.alibaba.fastjson.JSON;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;

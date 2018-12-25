@@ -1,7 +1,4 @@
-package com.github.spectre.aol.agent;
-
-import java.io.IOException;
-import java.util.List;
+package com.github.spectre.hotlog.agent;
 
 /**
  * Author:wanyang
@@ -17,7 +14,7 @@ public class JVMTIThread {
 //        for (VirtualMachineDescriptor vmd : list) {
 //            if (vmd.displayName().endsWith("AccountMain")) {
 //                VirtualMachine virtualMachine = VirtualMachine.attach(vmd.id());
-//                virtualMachine.loadAgent("F:\\git\\aol\\out\\artifacts\\agent\\agent.jar ", "cxs");
+//                virtualMachine.loadAgent("F:\\git\\hotlog\\out\\artifacts\\agent\\agent.jar ", "cxs");
 //                System.out.println("ok");
 //                virtualMachine.detach();
 //            }

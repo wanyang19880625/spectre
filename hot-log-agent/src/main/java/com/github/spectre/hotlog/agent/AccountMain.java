@@ -1,8 +1,4 @@
-package com.github.spectre.aol.agent;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
+package com.github.spectre.hotlog.agent;
 
 /**
  * Author:wanyang

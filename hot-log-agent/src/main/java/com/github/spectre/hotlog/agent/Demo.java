@@ -1,4 +1,4 @@
-package com.github.spectre.aol.agent;
+package com.github.spectre.hotlog.agent;
 
 /**
  * Author:wanyang

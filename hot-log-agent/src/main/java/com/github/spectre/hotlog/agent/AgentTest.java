@@ -1,24 +1,25 @@
-package com.github.spectre.aol.agent;
+package com.github.spectre.hotlog.agent;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
-import java.lang.instrument.UnmodifiableClassException;
 import java.security.ProtectionDomain;
 
 /**
  * Author:wanyang
  * Mail:wanyangnumberone@aliyun.com
  * https://github.com/wanyang19880625
- * Created by wanyang on 2018/12/2 23:11.
+ * Created by wanyang on 2018/11/28 22:15.
  */
-public class AgentMainTraceAgent {
+public class AgentTest {
 
-    public static void agentmain(String agentArgs, Instrumentation inst)
-            throws UnmodifiableClassException {
-        System.out.println("Agent Main called");
-        System.out.println("agentArgs : " + agentArgs);
-        inst.addTransformer(new ClassFileTransformer() {
+    public static void premain(String args, Instrumentation instrumentation) {
+        System.out.println("Agent premain args:"+args);
+    }
+
+    public static void agentmain(String args, Instrumentation instrumentation) {
+        System.out.println("Agent agentmain args:"+args);
+        instrumentation.addTransformer(new ClassFileTransformer() {
 
             @Override
             public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
@@ -28,6 +29,6 @@ public class AgentMainTraceAgent {
                 return classfileBuffer;
             }
         }, true);
-        inst.retransformClasses(Account.class);
+//        instrumentation.retransformClasses(Account.class);
     }
 }
