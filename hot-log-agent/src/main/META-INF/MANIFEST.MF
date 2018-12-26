@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Can-Redefine-Classes: true
-Premain-Class: com.github.spectre.hotlog.agent.myagent.MyAgent
-Can-Retransform-Classes: true
