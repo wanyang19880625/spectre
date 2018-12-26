@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <premain-class>com.github.spectre.hotlog.agent.myagent.MyAgent</premain-class>
+        <premain-class>com.github.spectre.hotlog.agent.myagent.HotLogAgent</premain-class>
     </properties>
 
     <dependencies>
@@ -28,6 +28,25 @@
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
             <version>${bytebuddy.version}</version>
+        </dependency>
+
+        <!--slf4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <!--logback-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
     </dependencies>
 
@@ -58,9 +77,12 @@
                             </transformers>
                             <artifactSet>
                                 <includes>
-                                    <include>javassist:javassist:jar:</include>
+                                    <!--<include>javassist:javassist:jar:</include>-->
                                     <include>net.bytebuddy:byte-buddy:jar:</include>
                                     <include>net.bytebuddy:byte-buddy-agent:jar:</include>
+                                    <include>org.slf4j:slf4j-api:jar:</include>
+                                    <include>ch.qos.logback:logback-classic:jar:</include>
+                                    <include>ch.qos.logback:logback-core:jar:</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
