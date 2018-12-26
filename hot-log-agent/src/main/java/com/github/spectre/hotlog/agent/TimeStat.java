@@ -8,7 +8,7 @@ package com.github.spectre.hotlog.agent;
  */
 public class TimeStat {
 
-    static ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+    static ThreadLocal<Long> threadLocal = new ThreadLocal<Long>();
     public static void start() {
         threadLocal.set(System.currentTimeMillis());
     }

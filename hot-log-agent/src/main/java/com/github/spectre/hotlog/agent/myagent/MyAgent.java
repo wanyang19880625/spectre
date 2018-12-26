@@ -1,13 +1,19 @@
 package com.github.spectre.hotlog.agent.myagent;
 
+import java.lang.instrument.Instrumentation;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+
+import com.github.spectre.hotlog.agent.log.AgentLogHandler;
+import com.github.spectre.hotlog.agent.log.AgentLogRecord;
+
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.JavaModule;
-
-import java.lang.instrument.Instrumentation;
 
 /**
  * Author:wanyang
@@ -18,9 +24,14 @@ import java.lang.instrument.Instrumentation;
 public class MyAgent {
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        System.out.println("this is my first agent");
+        Logger logger = Logger.getLogger(MyAgent.class.getName());
+        logger.addHandler(new AgentLogHandler());
+        String str = "this is my first agent";
+        LogRecord logRecord = new AgentLogRecord(Level.INFO, str);
+//        logRecord.setThreadID(Math.toIntExact(Thread.currentThread().getId()));
+//        logRecord.setMillis(System.currentTimeMillis());
+        logger.log(logRecord);
         AgentBuilder.Transformer transformer = new AgentBuilder.Transformer() {
-            @Override
             public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader) {
                 return builder
                         .method(ElementMatchers.any()) // 拦截任意方法
@@ -29,23 +40,19 @@ public class MyAgent {
         };
 
         AgentBuilder.Listener listener = new AgentBuilder.Listener() {
-            @Override
-            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, DynamicType dynamicType) {
+            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType) {
+                
+            }
+
+            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
 
             }
 
-            @Override
-            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
+            public void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable) {
 
             }
 
-            @Override
-            public void onError(String s, ClassLoader classLoader, JavaModule javaModule, Throwable throwable) {
-
-            }
-
-            @Override
-            public void onComplete(String s, ClassLoader classLoader, JavaModule javaModule) {
+            public void onComplete(String typeName, ClassLoader classLoader, JavaModule module) {
 
             }
         };
