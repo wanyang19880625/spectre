@@ -2,16 +2,19 @@ package com.github.spectre.hotlog.agent.myagent;
 
 import java.lang.instrument.Instrumentation;
 
-import ch.qos.logback.classic.PatternLayout;
+import com.github.spectre.hotlog.agent.loader.HotLogClassLoader;
+import org.slf4j.Logger;
+
 import com.github.spectre.hotlog.agent.log.AgentLoggerFactory;
+
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 import net.bytebuddy.utility.JavaModule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.sound.midi.ControllerEventListener;
 
 /**
  * Author:wanyang
@@ -30,7 +33,8 @@ public class HotLogAgent {
             public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader) {
                 return builder
                         .method(ElementMatchers.any()) // 拦截任意方法
-                        .intercept(MethodDelegation.to(TimeInterceptor.class)); // 委托
+                        .intercept(MethodDelegation.to(Interceptor.class))
+                        ; // 委托
             }
         };
 
@@ -54,7 +58,8 @@ public class HotLogAgent {
 
         new AgentBuilder
                 .Default()
-                .type(ElementMatchers.nameStartsWith("com.github.spectre.hotlog.agent.myagent")) // 指定需要拦截的类
+//                        .ignore(ElementMatchers.nameStartsWith("net.bytebuddy"))
+                .type(ElementMatchers.nameStartsWith("com.github")) // 指定需要拦截的类
                 .transform(transformer)
                 .with(listener)
                 .installOn(inst);

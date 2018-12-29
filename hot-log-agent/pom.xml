@@ -83,11 +83,20 @@
                                     <include>org.slf4j:slf4j-api:jar:</include>
                                     <include>ch.qos.logback:logback-classic:jar:</include>
                                     <include>ch.qos.logback:logback-core:jar:</include>
+                                    <include>com.alibaba:fastjson:jar:</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
