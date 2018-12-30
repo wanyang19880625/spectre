@@ -1,5 +1,7 @@
 package com.github.spectre.hotlog.controller;
 
+import com.github.spectre.hotlog.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,15 +18,12 @@ import java.util.logging.Logger;
 @RestController
 public class TestController {
 
+    @Autowired
+    private TestService testService;
+
     @GetMapping(value = "test")
     public String test(@RequestParam String str) {
-        Logger logger = Logger.getLogger(TestController.class.getName());
-        logger.log(Level.INFO,str);
-        logger.log(Level.FINE,str);
-        logger.info("test application");
-
-
-
+        testService.hello("hello");
         return "result:"+str;
     }
 }

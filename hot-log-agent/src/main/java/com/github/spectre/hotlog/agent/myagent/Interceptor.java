@@ -1,17 +1,16 @@
 package com.github.spectre.hotlog.agent.myagent;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.github.spectre.hotlog.agent.log.AgentLoggerFactory;
 
-import net.bytebuddy.implementation.bind.annotation.AllArguments;
-import net.bytebuddy.implementation.bind.annotation.Origin;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
+import org.springframework.stereotype.Controller;
 
 /**
  * Author:wanyang
@@ -24,8 +23,13 @@ public class Interceptor {
     private static final Logger logger = AgentLoggerFactory.getLogger(Interceptor.class);
 
     @RuntimeType
-    public static Object intercept(@Origin Method method, @SuperCall Callable<?> callable,@AllArguments Object[] allArguments)
+    public static Object intercept(@This Object obj, @Origin Method method, @SuperCall Callable<?> callable, @AllArguments Object[] allArguments)
             throws Exception {
+        EnhanceInstance enhanceInstance = (EnhanceInstance)obj;
+        Annotation[] annotations = method.getDeclaringClass().getDeclaredAnnotations();
+        for (Annotation annotation:annotations) {
+            logger.info("name:"+annotation.annotationType().getSimpleName());
+        }
         try {
             if (null != allArguments && 0 != allArguments.length) {
                 for (Object args : allArguments) {
